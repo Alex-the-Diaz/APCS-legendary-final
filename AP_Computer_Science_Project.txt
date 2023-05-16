@@ -1,0 +1,186 @@
+#Allows timers so that console can be temporarily printed to
+import time
+
+def inital_function(user_first_choice):
+
+    #decides the type of poem and directs to that specific function, then a list is used for explination purposes"
+    #here a lost is used so i can call on it instead of several diffrent definitions
+    my_list = ("Great choice, and Ode is a lyric poem in the form of an address to a particular subject, often elevated in style or manner and written in varied or irregular meter.","Great choice a Haiku is a Japanese poem of seventeen syllables, in three lines of five, seven, and five, traditionally evoking images of the natural world.")
+    
+    #if user enters "Ode" they are given a description of an ode, which is printed to the console, and directed to that function
+    if user_first_choice == "Ode":
+        print(my_list[0])
+        def callback():
+            ode_function()
+        window.setTimeout(callback,1000)
+    #if user enters "Haiku" they are given a description of an haiku, which is printed to the console, and directed to that function
+    elif user_first_choice == "Haiku":
+        print(my_list[1])
+        def callback():
+            haiku_function()
+        window.setTimeout(callback,1000)
+    #if Neither "Ode" or "Haiku" are entered, the code is recalled, along with a note about choosing one 
+    else:
+        print("Sorry, I dont know that type of poem, try again please")
+        def callback():
+            user_first_choice = input("Do you want to write a Ode or a Haiku?")
+            inital_function(user_first_choice)
+        window.setTimeout(callback,1000)
+ 
+#This asks the user for inputs about their Ode       
+def ode_function():
+    print("the setting for your Ode is a dark forest, awnser the following questions to form a poem and a picture. ")
+    setting_use = "dark forest"
+    verb_one = input("alright, give me one of the 5 senses as an action")
+    adjective_one = input("describe the moon with one word")
+    input_color = input("what color is the sky?")
+    input_number = input("How many feet tall are the trees?")
+    #the awnsers to these questions are then used as perameters for the function that prints the Ode and image
+    final_user_story_ode(setting_use,verb_one,adjective_one,input_number,input_color)
+#This asks the user for inputs about their Haiku        
+def haiku_function():   
+    print("the setting for your haiku is a silent hill, awnser the following questions to form a poem and a picture.!")
+    setting_use = "hill"
+    adjective_one = input("use a 1 sylable word to describe the temperature.")
+    input_color = input("what color are the trees")
+    verb_one = input("one sylable word to describe movement")
+    #the awnsers to these questions are then used as perameters for the function that prints the Ode and image
+    final_user_story_haiku(setting_use,adjective_one,input_color,verb_one)
+    
+    
+    
+    
+    
+    
+"""
+Now, using the user input an Ode and a picture are created, then, the ode is pasted over the image.
+The image is partley based off of user input
+"""
+def final_user_story_ode(setting_use,verb_one,adjective_one,input_number,input_color):
+#these perameter values are then placed into strings that are printed over teh generated image   
+    speak_1=("I fear the " + setting_use + ", the flavor remains, a truly satiating expirence." )
+    speak_2=("I " + verb_one + " the pale moon, for on me, she is never wated")
+    speak_3=("I lie in purgetory, slipping, arrow hither born, still seeing its " + adjective_one + " smile, in slim daylight")
+    speak_4=("trees stand " + input_number + " feet tall, pitying, as i eer soon six under")
+    speak_5=("a " + input_color + " sky with a moon at day, what a way, for even one more second, on my last day")
+    #how tall the tree will be is multiplied by 10 for realism
+    x = 10*int(input_number)
+    #this now paints the image based on user input
+    #background image
+    user_background = Image("https://codehs.com/uploads/5a8eb3dc7e30606510c478c1c5088eed")
+    user_background.set_size(get_width(), get_height())
+    user_background.set_position(0, 0)
+    add(user_background) 
+    #left tree stump
+    left_tree = Rectangle(20,get_height()+x)
+    left_tree.set_position(0,get_height()-x)
+    left_tree.set_color("brown")
+    add(left_tree)
+    #right tree stump
+    right_tree = Rectangle(20,get_height()+x)
+    right_tree.set_position(380,get_height()-x)
+    right_tree.set_color("brown")
+    add(right_tree)
+    #left tree leaves
+    circle = Circle(50)
+    circle.set_position(0, get_height() - x)
+    circle.set_color("green")
+    add(circle)
+    #right tree leaves
+    circle = Circle(50)
+    circle.set_position(390,get_height()-x)
+    circle.set_color("green")
+    add(circle)
+    #this generates the "sky" which is the background for the text
+    rect = Rectangle(400, 80)
+    rect.set_position(0,0)
+    rect.set_color(input_color)
+    add(rect)
+    #Now the poem is printed to the console
+    txt = Text(speak_1)
+    txt.set_position(10,20)
+    txt.set_color(Color.black)
+    txt.set_font("7pt Arial")
+    add(txt)
+    txt = Text(speak_2)
+    txt.set_position(10,30)
+    txt.set_color(Color.black)
+    txt.set_font("7pt Arial")
+    add(txt)
+    txt = Text(speak_3)
+    txt.set_position(10,40)
+    txt.set_color(Color.black)
+    txt.set_font("7pt Arial")
+    add(txt)
+    txt = Text(speak_4)
+    txt.set_position(10,50)
+    txt.set_color(Color.black)
+    txt.set_font("7pt Arial")
+    add(txt)
+    txt = Text(speak_5)
+    txt.set_position(10,60)
+    txt.set_color(Color.black)
+    txt.set_font("7pt Arial")
+    add(txt)
+
+
+
+
+
+
+
+
+"""
+Now, using the user input a Haiku and a picture are created, then, the haiku is pasted over the image.
+The image is partley based off of user input
+"""  
+def final_user_story_haiku(setting_use,adjective_one,input_color,verb_one):
+    #these perameter values are then placed into strings that are printed over teh generated image 
+    speak_1 = ("The " + adjective_one + " " +setting_use + " air speaks")
+    speak_2 = (input_color + " trees wave, I remain suspect")
+    speak_3 = ("I "+ verb_one + " fervently" )
+    #background image
+    user_background = Image("https://codehs.com/uploads/d06a37e303a2fa43a5aacda3a56e4a6b")
+    user_background.set_size(get_width(), get_height())
+    user_background.set_position(0, 0)
+    add(user_background) 
+    # a loop is used to create a random assortment of trees along the canvas
+    for i in range(8):
+        #each tree is 50 pixels to the right of the previous tree based on the i value
+        x_pos= i * 50
+        #a random y value between 10 and 30 lower than the previous tree is generated
+        random_num = random.randint(10, 30)   
+        y_pos= i * random_num
+        tree = Rectangle(5, 50)
+        tree.set_position(x_pos + 20, 400 - y_pos)
+        tree.set_color("brown")
+        add(tree)
+        #adding leaves
+        circle = Circle(20)
+        circle.set_position(x_pos + 20, 400 - y_pos)
+        circle.set_color(input_color)
+        add(circle)
+    #Now the poem is printed to the console
+    txt = Text(speak_1)
+    txt.set_position(get_width()/4,40)
+    txt.set_color(Color.black)
+    txt.set_font("15pt Arial")
+    add(txt)
+    txt = Text(speak_2)
+    txt.set_position(get_width()/4,60)
+    txt.set_color(Color.black)
+    txt.set_font("15pt Arial")
+    add(txt)
+    txt = Text(speak_3)
+    txt.set_position(get_width()/4,80)
+    txt.set_color(Color.black)
+    txt.set_font("15pt Arial")
+    add(txt)
+  
+
+#introduces the purpose of the bot, calls a timer so that the console can be printed to, and calls the inital function
+print("Hello, I am a creative writing bot, and by simply selecting a style, nouns and adjectives, I will create a short story and picture to go with it! ")
+def callback():
+    user_first_choice = input("Do you want to write a Ode or a Haiku?")
+    inital_function(user_first_choice)
+window.setTimeout(callback,1000)
